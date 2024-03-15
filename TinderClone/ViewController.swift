@@ -28,17 +28,12 @@ class ViewController: UIViewController {
         let blueView = UIView()
         blueView.backgroundColor = .blue
         
-        let yellowView = UIView()
-        yellowView.backgroundColor = .yellow
-        yellowView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        let buttonStackView = HomeBottomControlsStackView()
         
-        let stackView = UIStackView(arrangedSubviews: [topStackdView, blueView, yellowView])
-//        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        view.addSubview(stackView)
-        stackView.frame = .init(x: 0, y: 0, width: 300, height: 200)
-        
-        stackView.fillSuperview()
+        let overallStackView = UIStackView(arrangedSubviews: [topStackdView, blueView, buttonStackView])
+        overallStackView.axis = .vertical
+        view.addSubview(overallStackView)
+        overallStackView.fillSuperview()
         
     }
 
