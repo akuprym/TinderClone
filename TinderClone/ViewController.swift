@@ -14,13 +14,26 @@ class ViewController: UIViewController {
        
         let grayView = UIView()
         grayView.backgroundColor = .gray
+    
+        let subviews = [UIColor.systemGray, UIColor.darkGray, UIColor.black].map { color in
+            let v = UIView()
+            v.backgroundColor = color
+            return v
+        }
         
-        let redView = UIView()
-        redView.backgroundColor = .red
+        let topStackdView = UIStackView(arrangedSubviews: subviews)
+        topStackdView.distribution = .fillEqually
+        topStackdView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
         let blueView = UIView()
         blueView.backgroundColor = .blue
-        let stackView = UIStackView(arrangedSubviews: [redView, blueView])
-        stackView.distribution = .fillEqually
+        
+        let yellowView = UIView()
+        yellowView.backgroundColor = .yellow
+        yellowView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        
+        let stackView = UIStackView(arrangedSubviews: [topStackdView, blueView, yellowView])
+//        stackView.distribution = .fillEqually
         stackView.axis = .vertical
         view.addSubview(stackView)
         stackView.frame = .init(x: 0, y: 0, width: 300, height: 200)
