@@ -12,23 +12,16 @@ class HomeBottomControlsStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         distribution = .fillEqually
-        heightAnchor.constraint(equalToConstant: 120).isActive = true
+        heightAnchor.constraint(equalToConstant: 100).isActive = true
        
         
         let subviews = [#imageLiteral(resourceName: "refresh_circle"), #imageLiteral(resourceName: "super_like_circle"), #imageLiteral(resourceName: "like_circle"), #imageLiteral(resourceName: "dismiss_circle"), #imageLiteral(resourceName: "boost_circle") ].map { img in
             let button = UIButton(type: .system)
-            button.setImage(img, for: .normal)
+            button.setImage(img.withRenderingMode(.alwaysOriginal), for: .normal)
             return button
         }
-        
-        let button = UIButton(type: .system)
-        // bottom row of buttons
-        let bottomSubviews = [UIColor.red, .green, .blue, .yellow, .purple].map { color in
-            let v = UIView()
-            v.backgroundColor = color
-            return v
-        }
-        bottomSubviews.forEach { v in
+     
+        subviews.forEach { v in
             addArrangedSubview(v)
         }
     }

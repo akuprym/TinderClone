@@ -9,33 +9,33 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let topStackdView = TopNavigationStackView()
+    let cardDeckView = UIView()
+    let buttonStackView = HomeBottomControlsStackView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        let grayView = UIView()
-        grayView.backgroundColor = .gray
     
-        let subviews = [UIColor.systemGray, UIColor.darkGray, UIColor.black].map { color in
-            let v = UIView()
-            v.backgroundColor = color
-            return v
-        }
+        cardDeckView.backgroundColor = .blue
+        setupLayout()
         
-        let topStackdView = UIStackView(arrangedSubviews: subviews)
-        topStackdView.distribution = .fillEqually
-        topStackdView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        
-        let blueView = UIView()
-        blueView.backgroundColor = .blue
-        
-        let buttonStackView = HomeBottomControlsStackView()
-        
-        let overallStackView = UIStackView(arrangedSubviews: [topStackdView, blueView, buttonStackView])
-        overallStackView.axis = .vertical
-        view.addSubview(overallStackView)
-        overallStackView.fillSuperview()
+        setupProfileCards()
         
     }
-
+    
+    fileprivate func setupProfileCards() {
+        let cardView = CardView(frame: .zero)
+        cardDeckView.addSubview(cardView)
+        cardView.fillSuperview()
+    }
+    
+// MARK: - Fileprivate
+    
+    fileprivate func setupLayout() {
+        let overallStackView = UIStackView(arrangedSubviews: [topStackdView, cardDeckView, buttonStackView])
+        overallStackView.axis = .vertical
+        view.addSubview(overallStackView)
+        overallStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
+    }
 
 }
