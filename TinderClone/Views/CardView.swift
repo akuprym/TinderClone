@@ -24,9 +24,28 @@ class CardView: UIView {
     }
     
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
-        print(gesture.translation(in: nil))
+       
+        switch gesture.state {
+        case .changed:
+            handleChangedState(gesture)
+        case .ended:
+            handleEndedState()
+        default:
+            ()
+        }
     }
     
+    fileprivate func handleChangedState(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: nil)
+        self.transform = CGAffineTransform(translationX: translation.x, y: translation.y)
+    }
+    
+    fileprivate func handleEndedState() {
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1) {
+            self.transform = .identity
+        }
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
