@@ -18,7 +18,6 @@ class ViewController: UIViewController {
 
         setupLayout()
         setupProfileCards()
-        
     }
     
     fileprivate func setupProfileCards() {
