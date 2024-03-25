@@ -37,7 +37,14 @@ class CardView: UIView {
     
     fileprivate func handleChangedState(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: nil)
-        self.transform = CGAffineTransform(translationX: translation.x, y: translation.y)
+        // rotation + conversion degrees to radians
+        let degrees: CGFloat = translation.x
+        let angle = degrees * CGFloat.pi / 180
+        
+        let rotationTransformation = CGAffineTransform(rotationAngle: angle)
+        self.transform = rotationTransformation
+
+//        self.transform = CGAffineTransform(translationX: translation.x, y: translation.y)
     }
     
     fileprivate func handleEndedState() {
