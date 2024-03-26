@@ -7,11 +7,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeController: UIViewController {
 
     let topStackdView = TopNavigationStackView()
     let cardDeckView = UIView()
     let buttonStackView = HomeBottomControlsStackView()
+    
+    let users = [
+    User(name: "Jane", age: 27, profession: "Artist", photoName: "profile_photo"),
+    User(name: "Alise", age: 26, profession: "Dancer", photoName: "profile_photo2")
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +26,12 @@ class ViewController: UIViewController {
     }
     
     fileprivate func setupProfileCards() {
-        let cardView = CardView(frame: .zero)
-        cardDeckView.addSubview(cardView)
-        cardView.fillSuperview()
+        users.forEach { user in
+            let cardView = CardView(frame: .zero)
+            cardView.imageView.image = UIImage(named: user.photoName)
+            cardDeckView.addSubview(cardView)
+            cardView.fillSuperview()
+        }
     }
     
 // MARK: - Fileprivate
