@@ -7,34 +7,36 @@
 
 import UIKit
 
-class HomeController: UIViewController {
-
+class ViewController: UIViewController {
+    
     let topStackdView = TopNavigationStackView()
     let cardDeckView = UIView()
     let buttonStackView = HomeBottomControlsStackView()
     
-    let users = [
-    User(name: "Jane", age: 27, profession: "Artist", photoName: "profile_photo"),
-    User(name: "Alise", age: 26, profession: "Dancer", photoName: "profile_photo2")
+    let viewModels = [
+        User(name: "Jane", age: 24, profession: "Artist", photoName: "profile_photo").toCardViewModel(),
+        User(name: "Alisa", age: 26, profession: "Dancer", photoName: "profile_photo2").toCardViewModel()
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
         setupLayout()
         setupProfileCards()
     }
     
     fileprivate func setupProfileCards() {
-        users.forEach { user in
+        viewModels.forEach { cardVM in
+            
             let cardView = CardView(frame: .zero)
-            cardView.imageView.image = UIImage(named: user.photoName)
+            cardView.imageView.image = UIImage(named: cardVM.photoName)
+            cardView.informationLabel.attributedText = cardVM.attributedString
             cardDeckView.addSubview(cardView)
             cardView.fillSuperview()
         }
     }
     
-// MARK: - Fileprivate
+    // MARK: - Fileprivate
     
     fileprivate func setupLayout() {
         let overallStackView = UIStackView(arrangedSubviews: [topStackdView, cardDeckView, buttonStackView])
@@ -46,5 +48,4 @@ class HomeController: UIViewController {
         
         overallStackView.bringSubviewToFront(cardDeckView)
     }
-
 }
