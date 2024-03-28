@@ -5,4 +5,21 @@
 //  Created by admin on 26.03.24.
 //
 
-import Foundation
+import UIKit
+
+struct User {
+    let name: String
+    let age: Int
+    let profession: String
+    let photoName: String
+    
+    func toCardViewModel() -> CardViewModel {
+        
+        let attributedText = NSMutableAttributedString(string: "\(name)", attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
+        attributedText.append(NSMutableAttributedString(string: " \(age)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .medium)]))
+        attributedText.append(NSMutableAttributedString(string: "\n\(profession)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .medium)]))
+        
+        return CardViewModel(photoName: photoName, attributedString: attributedText, textAllignment: .left)
+    }
+}
+

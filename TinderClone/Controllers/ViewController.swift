@@ -15,7 +15,8 @@ class ViewController: UIViewController {
     
     let viewModels = [
         User(name: "Jane", age: 24, profession: "Artist", photoName: "profile_photo").toCardViewModel(),
-        User(name: "Alisa", age: 26, profession: "Dancer", photoName: "profile_photo2").toCardViewModel()
+        User(name: "Alisa", age: 26, profession: "Dancer", photoName: "profile_photo2").toCardViewModel(),
+        Advertiser(title: "Make Your Day", brandName: "TikTok", posterPhotoName: "advertiser_photo").toCardViewModel()
     ]
     
     override func viewDidLoad() {
@@ -31,6 +32,7 @@ class ViewController: UIViewController {
             let cardView = CardView(frame: .zero)
             cardView.imageView.image = UIImage(named: cardVM.photoName)
             cardView.informationLabel.attributedText = cardVM.attributedString
+            cardView.informationLabel.textAlignment = cardVM.textAllignment
             cardDeckView.addSubview(cardView)
             cardView.fillSuperview()
         }
