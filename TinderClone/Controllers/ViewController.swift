@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     let topStackdView = TopNavigationStackView()
     let cardDeckView = UIView()
@@ -26,9 +26,16 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        topStackdView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+        
         setupLayout()
         setupProfileCards()
+    }
+    
+    @objc func handleSettings() {
+        let registrationController = RegistrationController()
+        present(registrationController, animated: true)
     }
     
     fileprivate func setupProfileCards() {
