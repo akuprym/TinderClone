@@ -33,11 +33,7 @@ class ViewController: UIViewController {
     
     fileprivate func setupProfileCards() {
         cardViewModels.forEach { cardVM in
-            
             let cardView = CardView(frame: .zero)
-            cardView.imageView.image = UIImage(named: cardVM.photoName)
-            cardView.informationLabel.attributedText = cardVM.attributedString
-            cardView.informationLabel.textAlignment = cardVM.textAllignment
             cardDeckView.addSubview(cardView)
             cardView.fillSuperview()
         }
