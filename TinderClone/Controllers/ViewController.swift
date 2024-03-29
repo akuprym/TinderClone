@@ -34,6 +34,7 @@ class ViewController: UIViewController {
     fileprivate func setupProfileCards() {
         cardViewModels.forEach { cardVM in
             let cardView = CardView(frame: .zero)
+            cardView.cardViewModel = cardVM
             cardDeckView.addSubview(cardView)
             cardView.fillSuperview()
         }
