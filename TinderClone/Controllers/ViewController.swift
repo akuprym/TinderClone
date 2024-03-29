@@ -13,12 +13,17 @@ class ViewController: UIViewController {
     let cardDeckView = UIView()
     let buttonStackView = HomeBottomControlsStackView()
     
-    let viewModels = [
-        User(name: "Jane", age: 24, profession: "Artist", photoName: "profile_photo").toCardViewModel(),
-        User(name: "Alisa", age: 26, profession: "Dancer", photoName: "profile_photo2").toCardViewModel(),
-        Advertiser(title: "Make Your Day", brandName: "TikTok", posterPhotoName: "advertiser_photo").toCardViewModel()
-    ]
-    
+    let cardViewModels: [CardViewModel] = {
+        let producers = [
+            User(name: "Jane", age: 24, profession: "Artist", photoName: "profile_photo"),
+            User(name: "Alisa", age: 26, profession: "Dancer", photoName: "profile_photo2"),
+            Advertiser(title: "Make Your Day", brandName: "TikTok", posterPhotoName: "advertiser_photo")
+        ] as [ProducesCardViewModel]
+        
+        let viewModels = producers.map { $0.toCardViewModel() }
+        return viewModels
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -27,7 +32,7 @@ class ViewController: UIViewController {
     }
     
     fileprivate func setupProfileCards() {
-        viewModels.forEach { cardVM in
+        cardViewModels.forEach { cardVM in
             
             let cardView = CardView(frame: .zero)
             cardView.imageView.image = UIImage(named: cardVM.photoName)
