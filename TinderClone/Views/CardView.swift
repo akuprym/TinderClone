@@ -8,7 +8,7 @@
 import UIKit
 
 class CardView: UIView {
-    
+     
     var cardViewModel: CardViewModel! {
         didSet {
             imageView.image = UIImage(named: cardViewModel.photoName)

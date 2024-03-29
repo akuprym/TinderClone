@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class ViewController: UIViewController {
     
     let topStackdView = TopNavigationStackView()
     let cardDeckView = UIView()
@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
         let viewModels = producers.map { $0.toCardViewModel() }
         return viewModels
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,4 +59,5 @@ class HomeViewController: UIViewController {
         
         overallStackView.bringSubviewToFront(cardDeckView)
     }
+    
 }
