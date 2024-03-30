@@ -46,11 +46,11 @@ class RegistrationController: UIViewController {
     let registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         button.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
         button.setTitleColor(.white, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        button.layer.cornerRadius = 25
+        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        button.layer.cornerRadius = 22
         return button
     }()
     
