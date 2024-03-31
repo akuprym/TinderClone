@@ -38,6 +38,8 @@ class ViewController: UIViewController {
         present(registrationController, animated: true)
     }
     
+    // MARK: - Fileprivate
+    
     fileprivate func setupProfileCards() {
         cardViewModels.forEach { cardVM in
             let cardView = CardView(frame: .zero)
@@ -46,8 +48,6 @@ class ViewController: UIViewController {
             cardView.fillSuperview()
         }
     }
-    
-    // MARK: - Fileprivate
     
     fileprivate func setupLayout() {
         let overallStackView = UIStackView(arrangedSubviews: [topStackdView, cardDeckView, buttonStackView])

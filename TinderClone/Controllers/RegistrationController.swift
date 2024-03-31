@@ -62,7 +62,7 @@ class RegistrationController: UIViewController {
         setupTapGesture()
     }
     
-    // Mark: - Private
+    // MARK: - Fileprivate
     
     fileprivate func setupTapGesture() {
         
@@ -72,13 +72,22 @@ class RegistrationController: UIViewController {
 
           @objc func hideKeyboard() {
               view.endEditing(true)
-              UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, animations: {
-                  self.view.transform = .identity
-              })
           }
     
     fileprivate func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc fileprivate func handleKeyboardHide() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, animations: {
+            self.view.transform = .identity
+        })
     }
     
     @objc fileprivate func handleKeyboardShow(notification: Notification) {
