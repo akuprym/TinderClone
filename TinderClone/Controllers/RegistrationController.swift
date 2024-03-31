@@ -59,13 +59,29 @@ class RegistrationController: UIViewController {
         setupGradientLayer()
         setupLayout()
         setupNotificationObservers()
+        setupTapGesture()
     }
+    
+    // Mark: - Private
+    
+    fileprivate func setupTapGesture() {
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+              view.addGestureRecognizer(tapGesture)
+          }
+
+          @objc func hideKeyboard() {
+              view.endEditing(true)
+              UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, animations: {
+                  self.view.transform = .identity
+              })
+          }
     
     fileprivate func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
-    @objc func handleKeyboardShow(notification: Notification) {
+    @objc fileprivate func handleKeyboardShow(notification: Notification) {
         guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardFrame = value.cgRectValue
         let bottomSpace = view.frame.height - stackView.frame.origin.y - stackView.frame.height
@@ -81,8 +97,6 @@ class RegistrationController: UIViewController {
         passwordTextField,
         registerButton
     ])
-    
-    // Mark: - Private
     
     fileprivate func setupLayout() {
         
