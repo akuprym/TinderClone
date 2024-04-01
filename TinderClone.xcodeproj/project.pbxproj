@@ -75,8 +75,8 @@
 		842317E22BB4BB16008526B5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				84E42CD52BA4BE1B009A7AB5 /* ViewController.swift */,
 				84D7FEF22BB6FE9A00FC932B /* RegistrationController.swift */,
+				84E42CD52BA4BE1B009A7AB5 /* ViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
