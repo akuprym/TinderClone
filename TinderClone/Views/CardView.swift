@@ -18,6 +18,7 @@ class CardView: UIView {
     }
 
     fileprivate let imageView = UIImageView(image: UIImage(named: "profile_photo"))
+    fileprivate let gradiendLayer = CAGradientLayer()
     fileprivate let informationLabel = UILabel()
     
     fileprivate let treshold: CGFloat = 75
@@ -45,7 +46,6 @@ class CardView: UIView {
     }
     
     //add a gradient layear
-    let gradiendLayer = CAGradientLayer()
     
     fileprivate func setupGradientLayer() {
         gradiendLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
@@ -60,6 +60,10 @@ class CardView: UIView {
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
         
         switch gesture.state {
+        case .began:
+            superview?.subviews.forEach({ subview in
+                subview.layer.removeAllAnimations()
+            })
         case .changed:
             handleChangedState(gesture)
         case .ended:
