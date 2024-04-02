@@ -2,8 +2,8 @@
 //  CardView.swift
 //  TinderClone
 //
-//  Created by admin on 22.03.24.
-//
+//  Created by Anna Kupryianchyk on 22.03.24.
+//  Copyright © 2024 Anna Kupryianchyk. All rights reserved.
 
 import UIKit
 
@@ -11,9 +11,17 @@ class CardView: UIView {
      
     var cardViewModel: CardViewModel! {
         didSet {
-            imageView.image = UIImage(named: cardViewModel.photoName)
+            let imageName = cardViewModel.photoNames.first ?? ""
+            imageView.image = UIImage(named: imageName)
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAllignment
+            
+            (0..<cardViewModel.photoNames.count).forEach { _ in
+                let barView = UIView()
+                barView.backgroundColor = UIColor(white: 0, alpha: 0.1)
+                barsStackView.addArrangedSubview(barView)
+            }
+            barsStackView.arrangedSubviews.first?.backgroundColor = .white
         }
     }
 
@@ -33,6 +41,8 @@ class CardView: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.fillSuperview()
         
+        setupBarsStackView()
+        
         setupGradientLayer()
         
         addSubview(informationLabel)
@@ -43,6 +53,15 @@ class CardView: UIView {
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
+    }
+    
+    fileprivate let barsStackView = UIStackView()
+    
+    fileprivate func setupBarsStackView() {
+        addSubview(barsStackView)
+        barsStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 8), size: .init(width: 0, height: 4))
+        barsStackView.spacing = 4
+        barsStackView.distribution = .fillEqually
     }
     
     //add a gradient layear
