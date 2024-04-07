@@ -6,6 +6,19 @@
 //
 
 import UIKit
+import Firebase
+
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        registrationViewModel.image = image
+        dismiss(animated: true)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+}
 
 class RegistrationController: UIViewController {
 
@@ -17,14 +30,22 @@ class RegistrationController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 275).isActive = true
         button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         return button
     }()
+    
+    @objc fileprivate func handleSelectPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        
+        present(imagePickerController, animated: true)
+    }
     
     let fullNameTextField: CustomTextField = {
         let textField = CustomTextField(padding: 16)
         textField.placeholder = "Enter full name"
         textField.backgroundColor = .white
-        textField.addTarget(RegistrationController.self, action: #selector(handleTextChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textField
     }()
     
@@ -33,7 +54,7 @@ class RegistrationController: UIViewController {
         textField.placeholder = "Enter email"
         textField.keyboardType = .emailAddress
         textField.backgroundColor = .white
-        textField.addTarget(RegistrationController.self, action: #selector(handleTextChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textField
     }()
     
@@ -42,20 +63,17 @@ class RegistrationController: UIViewController {
         textField.placeholder = "Enter password"
         textField.isSecureTextEntry = true
         textField.backgroundColor = .white
-        textField.addTarget(RegistrationController.self, action: #selector(handleTextChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textField
     }()
     
     @objc fileprivate func handleTextChange(textField: UITextField) {
-        let isValidForm = fullNameTextField.text?.isEmpty == false && emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
-        
-        registerButton.isEnabled = isValidForm
-        if isValidForm {
-            registerButton.backgroundColor = #colorLiteral(red: 0.8215164542, green: 0, blue: 0.3233771622, alpha: 1)
-            registerButton.setTitleColor(.white, for: .normal)
+        if textField == fullNameTextField {
+            registrationViewModel.fullName = fullNameTextField.text
+        } else if textField == emailTextField {
+            registrationViewModel.email = emailTextField.text
         } else {
-            registerButton.backgroundColor = .lightGray
-            registerButton.setTitleColor(.gray, for: .normal)
+            registrationViewModel.password = passwordTextField.text
         }
     }
     
@@ -70,8 +88,24 @@ class RegistrationController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         button.layer.cornerRadius = 22
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
         return button
     }()
+    
+    @objc fileprivate func handleRegister() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            if let error = error {
+                print(error)
+                let alert = UIAlertController(title: "Failed registration", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(.init(title: "OK", style: .default))
+                self.present(alert, animated: true)
+            }
+            print("Successfully registered user:", result?.user.uid ?? "")
+            self.hideKeyboard()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,9 +113,29 @@ class RegistrationController: UIViewController {
         setupLayout()
         setupNotificationObservers()
         setupTapGesture()
+        setupRegistrationViewModelObserver()
     }
     
     // MARK: - Fileprivate
+    
+    let registrationViewModel = RegistrationViewModel()
+    
+    fileprivate func setupRegistrationViewModelObserver() {
+        registrationViewModel.isFormValidObserver = { [unowned self] isValidForm in
+            print("Form is changing, is it valid?", isValidForm)
+            registerButton.isEnabled = isValidForm
+            if isValidForm {
+                registerButton.backgroundColor = #colorLiteral(red: 0.8215164542, green: 0, blue: 0.3233771622, alpha: 1)
+                registerButton.setTitleColor(.white, for: .normal)
+            } else {
+                registerButton.backgroundColor = .lightGray
+                registerButton.setTitleColor(.gray, for: .normal)
+            }
+        }
+        registrationViewModel.imageObserver = { [unowned self] img in
+            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+    }
     
     fileprivate func setupTapGesture() {
         
