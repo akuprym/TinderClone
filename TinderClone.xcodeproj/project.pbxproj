@@ -24,6 +24,7 @@
 		84E414602BC1C49700F7F384 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 84E4145F2BC1C49700F7F384 /* FirebaseMessaging */; };
 		84E414622BC1C49700F7F384 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 84E414612BC1C49700F7F384 /* FirebaseStorage */; };
 		84E414642BC1C50100F7F384 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84E414632BC1C50100F7F384 /* GoogleService-Info.plist */; };
+		84E414662BC2DD5E00F7F384 /* Binable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E414652BC2DD5E00F7F384 /* Binable.swift */; };
 		84E42CD22BA4BE1B009A7AB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E42CD12BA4BE1B009A7AB5 /* AppDelegate.swift */; };
 		84E42CD42BA4BE1B009A7AB5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E42CD32BA4BE1B009A7AB5 /* SceneDelegate.swift */; };
 		84E42CD62BA4BE1B009A7AB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E42CD52BA4BE1B009A7AB5 /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 		84D7FEF02BB5FA9D00FC932B /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		84D7FEF22BB6FE9A00FC932B /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		84E414632BC1C50100F7F384 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		84E414652BC2DD5E00F7F384 /* Binable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binable.swift; sourceTree = "<group>"; };
 		84E42CCE2BA4BE1B009A7AB5 /* TinderClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E42CD12BA4BE1B009A7AB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84E42CD32BA4BE1B009A7AB5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				84D7FEF22BB6FE9A00FC932B /* RegistrationController.swift */,
 				84E42CD52BA4BE1B009A7AB5 /* ViewController.swift */,
+				84E414652BC2DD5E00F7F384 /* Binable.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				846DB5982BB75A3000C95356 /* CustomTextField.swift in Sources */,
 				840DA5602BC1A94E0074F398 /* RegistrationViewModel.swift in Sources */,
 				84C72F1D2BA4C39D00E22306 /* Extension+UIView.swift in Sources */,
+				84E414662BC2DD5E00F7F384 /* Binable.swift in Sources */,
 				84E42CD42BA4BE1B009A7AB5 /* SceneDelegate.swift in Sources */,
 				842317E12BB4B7D9008526B5 /* CardViewModel.swift in Sources */,
 			);

@@ -12,7 +12,8 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
   
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
-        registrationViewModel.image = image
+        registrationViewModel.binableImage.value = image
+//        registrationViewModel.image = image
         dismiss(animated: true)
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -132,9 +133,13 @@ class RegistrationController: UIViewController {
                 registerButton.setTitleColor(.gray, for: .normal)
             }
         }
-        registrationViewModel.imageObserver = { [unowned self] img in
+        
+        registrationViewModel.binableImage.bind { [unowned self] img in
             self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
+//        registrationViewModel.imageObserver = { [unowned self] img in
+//            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
+//        }
     }
     
     fileprivate func setupTapGesture() {

@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let topStackdView = TopNavigationStackView()
+    let topStackView = TopNavigationStackView()
     let cardDeckView = UIView()
     let buttonStackView = HomeBottomControlsStackView()
     
@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topStackdView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+        topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         
         setupLayout()
         setupProfileCards()
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
     }
     
     fileprivate func setupLayout() {
-        let overallStackView = UIStackView(arrangedSubviews: [topStackdView, cardDeckView, buttonStackView])
+        let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardDeckView, buttonStackView])
         overallStackView.axis = .vertical
         view.addSubview(overallStackView)
         overallStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)

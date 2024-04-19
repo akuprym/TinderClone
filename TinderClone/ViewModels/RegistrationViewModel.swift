@@ -9,11 +9,13 @@ import UIKit
 
 class RegistrationViewModel {
     
-    var image: UIImage? {
-        didSet {
-            imageObserver?(image)
-        }
-    }
+    var binableImage = Bindable<UIImage>()
+    
+//    var image: UIImage? {
+//        didSet {
+//            imageObserver?(image)
+//        }
+//    }
     
     var imageObserver: ((UIImage?) -> ())?
     
