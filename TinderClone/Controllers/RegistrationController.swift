@@ -122,8 +122,9 @@ class RegistrationController: UIViewController {
     let registrationViewModel = RegistrationViewModel()
     
     fileprivate func setupRegistrationViewModelObserver() {
-        registrationViewModel.isFormValidObserver = { [unowned self] isValidForm in
-            print("Form is changing, is it valid?", isValidForm)
+        
+        registrationViewModel.bindableIsFormValid.bind { [unowned self] isValidForm in
+            guard let isValidForm = isValidForm else { return }
             registerButton.isEnabled = isValidForm
             if isValidForm {
                 registerButton.backgroundColor = #colorLiteral(red: 0.8215164542, green: 0, blue: 0.3233771622, alpha: 1)
@@ -137,6 +138,19 @@ class RegistrationController: UIViewController {
         registrationViewModel.binableImage.bind { [unowned self] img in
             self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
+        
+//        registrationViewModel.isFormValidObserver = { [unowned self] isValidForm in
+//            print("Form is changing, is it valid?", isValidForm)
+//            registerButton.isEnabled = isValidForm
+//            if isValidForm {
+//                registerButton.backgroundColor = #colorLiteral(red: 0.8215164542, green: 0, blue: 0.3233771622, alpha: 1)
+//                registerButton.setTitleColor(.white, for: .normal)
+//            } else {
+//                registerButton.backgroundColor = .lightGray
+//                registerButton.setTitleColor(.gray, for: .normal)
+//            }
+//        }
+
 //        registrationViewModel.imageObserver = { [unowned self] img in
 //            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
 //        }
