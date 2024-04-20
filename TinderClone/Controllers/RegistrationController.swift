@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import ProgressHUD
 
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
@@ -93,12 +94,17 @@ class RegistrationController: UIViewController {
         return button
     }()
     
+    
     @objc fileprivate func handleRegister() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
+        
+        ProgressHUD.animate("Register")
+        
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
                 print(error)
+                ProgressHUD.dismiss()
                 let alert = UIAlertController(title: "Failed registration", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(.init(title: "OK", style: .default))
                 self.present(alert, animated: true)

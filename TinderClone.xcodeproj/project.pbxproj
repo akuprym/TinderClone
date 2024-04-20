@@ -11,6 +11,7 @@
 		842317DE2BB2372C008526B5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842317DD2BB2372C008526B5 /* User.swift */; };
 		842317E12BB4B7D9008526B5 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842317E02BB4B7D9008526B5 /* CardViewModel.swift */; };
 		846DB5982BB75A3000C95356 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DB5972BB75A3000C95356 /* CustomTextField.swift */; };
+		847B71A12BD45B2500C77A9A /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 847B71A02BD45B2500C77A9A /* ProgressHUD */; };
 		84C72F1D2BA4C39D00E22306 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C72F1C2BA4C39D00E22306 /* Extension+UIView.swift */; };
 		84D58DFF2BAB2C1200A671D4 /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D58DFE2BAB2C1200A671D4 /* HomeBottomControlsStackView.swift */; };
 		84D58E012BAB978700A671D4 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D58E002BAB978700A671D4 /* TopNavigationStackView.swift */; };
@@ -62,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84E414582BC1C49700F7F384 /* FirebaseAnalytics in Frameworks */,
+				847B71A12BD45B2500C77A9A /* ProgressHUD in Frameworks */,
 				84E4145A2BC1C49700F7F384 /* FirebaseAuth in Frameworks */,
 				84E414602BC1C49700F7F384 /* FirebaseMessaging in Frameworks */,
 				84E4145C2BC1C49700F7F384 /* FirebaseFirestore in Frameworks */,
@@ -178,6 +180,7 @@
 				84E4145D2BC1C49700F7F384 /* FirebaseFirestoreSwift */,
 				84E4145F2BC1C49700F7F384 /* FirebaseMessaging */,
 				84E414612BC1C49700F7F384 /* FirebaseStorage */,
+				847B71A02BD45B2500C77A9A /* ProgressHUD */,
 			);
 			productName = TinderClone;
 			productReference = 84E42CCE2BA4BE1B009A7AB5 /* TinderClone.app */;
@@ -209,6 +212,7 @@
 			mainGroup = 84E42CC52BA4BE1B009A7AB5;
 			packageReferences = (
 				84698B982BC1AC4100534AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				847B719F2BD45B2500C77A9A /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 			);
 			productRefGroup = 84E42CCF2BA4BE1B009A7AB5 /* Products */;
 			projectDirPath = "";
@@ -484,9 +488,22 @@
 				minimumVersion = 10.23.1;
 			};
 		};
+		847B719F2BD45B2500C77A9A /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/relatedcode/ProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		847B71A02BD45B2500C77A9A /* ProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 847B719F2BD45B2500C77A9A /* XCRemoteSwiftPackageReference "ProgressHUD" */;
+			productName = ProgressHUD;
+		};
 		84E414572BC1C49700F7F384 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 84698B982BC1AC4100534AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
