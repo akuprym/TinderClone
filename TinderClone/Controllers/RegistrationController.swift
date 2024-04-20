@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 import ProgressHUD
 
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -111,6 +112,17 @@ class RegistrationController: UIViewController {
             }
             print("Successfully registered user:", result?.user.uid ?? "")
             self.hideKeyboard()
+        }
+        
+        let fileName = UUID().uuidString
+        let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
+        let imageData = registrationViewModel.binableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
+        ref.putData(imageData) { _, err in
+            if let err = err {
+                ProgressHUD.animate(err.localizedDescription)
+                return // bail
+            }
+            print("Finished uploading image to storage")
         }
     }
     
